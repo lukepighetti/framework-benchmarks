@@ -8,9 +8,10 @@ The following command is for 100 concurrent requests and
 hey -m GET -c 100 -n 1000 'http://localhost:80/api/health'
 ```
 
-| Framework | 10/1k | 100/1k | 1000/1k           |
-| --------- | ----- | ------ | ----------------- |
-| Laravel   | 0.152 | 1.26   | 2.92, 73% dropped |
+| Framework | 10/1k | 100/1k | 1000/1k           | Notes                        |
+| --------- | ----- | ------ | ----------------- | ---------------------------- |
+| Laravel   | 0.152 | 1.26   | 2.92, 73% dropped | Very consistent results      |
+| Rails     | 0.197 | 3.02   | 8.6, 80% dropped  | 90% much faster than Laravel |
 
 - _Results are for 99% latency_
 
@@ -22,6 +23,19 @@ hey -m GET -c 100 -n 1000 'http://localhost:80/api/health'
 - Endpoint `http://localhost:80/api/health`
 
 Notes:
+
 - Tools feel crusty, but well thought out
 - Choked under high concurrency
 - Not sure if `sail up` is representative of performance
+
+## Rails
+
+- Added `GET /health` endpoint via `rails generate controller health`
+- Run with `bin/rails server`
+- Endpoint `http://localhost:3000/health`
+
+Notes:
+
+- Results didn't seem as consistent as Laravel
+- Ran with min threads 5, max threads 5 (default)
+- No built in rate limiting
