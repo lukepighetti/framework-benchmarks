@@ -2,4 +2,4 @@ version: '3'
 
 tasks:
   laravel:dev: (cd laravel && ./vendor/bin/sail up)
-  ruby:dev: (cd blog && bin/rails server)
+  rails:dev: (cd rails && bin/rails server)
