@@ -8,10 +8,11 @@ The following command is for 100 concurrent requests and
 hey -m GET -c 100 -n 1000 'http://localhost:80/api/health'
 ```
 
-| Framework | 10/1k | 100/1k | 1000/1k           | Notes                        |
-| --------- | ----- | ------ | ----------------- | ---------------------------- |
-| Laravel   | 0.152 | 1.26   | 2.92, 73% dropped | Very consistent results      |
-| Rails     | 0.197 | 3.02   | 8.6, 80% dropped  | 90% much faster than Laravel |
+| Framework | 10/1k | 100/1k | 1000/1k            | Notes                        |
+| --------- | ----- | ------ | ------------------ | ---------------------------- |
+| Laravel   | 0.152 | 1.26   | 2.92, 73% dropped  | Very consistent results      |
+| Rails     | 0.197 | 3.02   | 8.6, 80% dropped   | 90% much faster than Laravel |
+| FastAPI   | 0.004 | 0.016  | 0.074, 69% dropped | Fast concurrency saturation  |
 
 - _Results are for 99% latency_
 
@@ -39,3 +40,16 @@ Notes:
 - Results didn't seem as consistent as Laravel
 - Ran with min threads 5, max threads 5 (default)
 - No built in rate limiting
+
+## FastAPI
+
+- Added `GET /health` endpoint in `main.py`
+- Run with `pipenv run uvicorn main:app --workers $(nproc)`
+- Test machine ran with 10 workers
+- Endpoint `http://localhost:8000/health`
+
+Notes:
+
+- Definitely the fastest by far
+- Also the smallest feature set... not a complete framework
+- Still fast even during concurrency saturation

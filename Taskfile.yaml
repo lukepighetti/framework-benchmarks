@@ -1,5 +1,6 @@
 version: '3'
 
 tasks:
-  laravel:dev: (cd laravel && ./vendor/bin/sail up)
-  rails:dev: (cd rails && bin/rails server)
+  laravel: (cd laravel && ./vendor/bin/sail up)
+  rails: (cd rails && bin/rails server)
+  fastapi: (cd fastapi && pipenv run uvicorn main:app --workers $(nproc))
