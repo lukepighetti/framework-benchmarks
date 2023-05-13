@@ -20,3 +20,8 @@ hey -m GET -c 100 -n 1000 'http://localhost:80/api/health'
 - Disabled `throttle` middleware in `Kernel.php`
 - Run with `./bin/sail up`
 - Endpoint `http://localhost:80/api/health`
+
+Notes:
+- Tools feel crusty, but well thought out
+- Choked under high concurrency
+- Not sure if `sail up` is representative of performance
