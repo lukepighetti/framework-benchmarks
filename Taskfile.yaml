@@ -1,6 +1,9 @@
-version: '3'
+version: "3"
 
 tasks:
   laravel: (cd laravel && ./vendor/bin/sail up)
   rails: (cd rails && bin/rails server)
   fastapi: (cd fastapi && pipenv run uvicorn main:app --workers $(nproc))
+  shelf:jit: (cd shelf && dart bin/api.dart)
+  shelf:n10: (cd shelf && dart bin/api_isolates.dart)
+  shelf:exe: (cd shelf && dart compile exe bin/api.dart && bin/api.exe)
