@@ -8,15 +8,16 @@ The following command is for 100 concurrent requests and
 hey -m GET -c 100 -n 1000 'http://localhost:80/api/health'
 ```
 
-| Framework   | 10/1k | 100/1k | 1000/1k            | Notes                        |
-| ----------- | ----- | ------ | ------------------ | ---------------------------- |
-| Laravel     | 0.152 | 1.26   | 2.92, 73% dropped  | Very consistent results      |
-| Rails       | 0.197 | 3.02   | 8.6, 80% dropped   | 90% much faster than Laravel |
-| FastAPI     | 0.004 | 0.016  | 0.074, 69% dropped | Fast concurrency saturation  |
-| shelf (jit) | 0.005 | 0.053  | 0.061, 55% dropped | Good high concurrency        |
-| shelf (n10) | 0.006 | 0.017  | 0.061, 68% dropped | JIT, 10 isolates             |
-| shelf (exe) | 0.004 | 0.032  | 0.063, 65% dropped | Slightly improved            |
-| django      | 0.063 | 0.441  | 0.274, 91% dropped | Faster than other frameworks |
+| Framework   | 10/1k | 100/1k | 1000/1k            | Notes                             |
+| ----------- | ----- | ------ | ------------------ | --------------------------------- |
+| Laravel     | 0.152 | 1.26   | 2.92, 73% dropped  | Very consistent results           |
+| Rails       | 0.197 | 3.02   | 8.6, 80% dropped   | 90% much faster than Laravel      |
+| FastAPI     | 0.004 | 0.016  | 0.074, 69% dropped | Fast concurrency saturation       |
+| shelf (jit) | 0.005 | 0.053  | 0.061, 55% dropped | Good high concurrency             |
+| shelf (n10) | 0.006 | 0.017  | 0.061, 68% dropped | JIT, 10 isolates                  |
+| shelf (exe) | 0.004 | 0.032  | 0.063, 65% dropped | Slightly improved                 |
+| django      | 0.063 | 0.441  | 0.274, 91% dropped | Faster than other frameworks      |
+| djangicorn  | 0.015 | 0.163  | 0.303, 77% dropped | Much faster than other frameworks |
 
 - _Results are for 99% latency_
 
@@ -82,3 +83,12 @@ Notes:
 
 - Faster than other large frameworks
 - Buckled under high concurrency
+
+## Djangicorn
+
+- Copy of Django from above, but running Uvicorn
+- Ran with 10 workers
+
+Notes:
+
+- Remarkably fast. Much faster than other large frameworks

@@ -8,3 +8,4 @@ tasks:
   shelf:n10: (cd shelf && dart bin/api_isolates.dart)
   shelf:exe: (cd shelf && dart compile exe bin/api.dart && bin/api.exe)
   django: (cd django && pipenv run python manage.py runserver)
+  djangicorn: (cd djangicorn && pipenv run gunicorn api.asgi:application -k uvicorn.workers.UvicornWorker -w $(nproc))
