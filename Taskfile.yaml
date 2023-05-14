@@ -7,3 +7,4 @@ tasks:
   shelf:jit: (cd shelf && dart bin/api.dart)
   shelf:n10: (cd shelf && dart bin/api_isolates.dart)
   shelf:exe: (cd shelf && dart compile exe bin/api.dart && bin/api.exe)
+  django: (cd django && pipenv run python manage.py runserver)
