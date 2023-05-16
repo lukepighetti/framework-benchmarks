@@ -1,7 +1,8 @@
 version: "3"
 
 tasks:
-  laravel: (cd laravel && ./vendor/bin/sail up)
+  laravel: (cd laravel && ./vendor/bin/sail build --no-cache && ./vendor/bin/sail up)
+  laravel-octane: (cd laravel-octane && ./vendor/bin/sail build --no-cache && ./vendor/bin/sail up)
   rails: (cd rails && bin/rails server)
   fastapi: (cd fastapi && pipenv run uvicorn main:app --workers $(nproc))
   shelf:jit: (cd shelf && dart bin/api.dart)
